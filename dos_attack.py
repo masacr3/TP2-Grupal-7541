@@ -20,7 +20,7 @@ def dos_attack(ips):
         for ip in ips[ip_key]:
 
             #no pertenece hash o !hash(key)
-            if ip.direccion not in dos_dic or dos_dic[ip.direccion] = []:
+            if ip.direccion not in dos_dic or dos_dic[ip.direccion] == []:
                 dos_dic[ip.direccion] = [ip]
                 continue
 
