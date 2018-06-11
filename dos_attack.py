@@ -2,6 +2,11 @@
 #By leo
 #code python > 2
 
+LIMIT_TIME = 5 #seconds
+
+def warning_time(time1, time2):
+    return (time2-time1) <= LIMIT_TIME
+
 def dos_attack(ips):
     """ devuelve una lista con los ips que realizaron un atake dos
 
@@ -24,10 +29,10 @@ def dos_attack(ips):
                 dos_dic[ip.direccion] = [ip]
                 continue
 
-            dos_time_ultimo = dos_dic[ip.direccion][-1]
+            dos_time = dos_dic[ip.direccion][0]
 
             #no hay DOS
-            if dos_time_ultimo != ip.tiempo:
+            if not warning_time(dos_time, ip.tiempo):
                 #limpio el registro
                 dos_dic[ip.direccion] = [];
 
