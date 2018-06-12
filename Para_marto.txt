@@ -1,0 +1,33 @@
+Hola marto.
+
+Segun lo q me comentaste.
+
+tenemos que si o si tener un hash cargado con los datos
+
+1) para pedir visitas es gratis obtenerlo del hash
+
+2) para el dos lo que te dijo Martin esta bueno.. pero hash tiene un problema..
+puede haber ips que colisionen... no seria correcto guardar los tiempos directamente  tendriamos que guardar el par {ip:tiempo} en hash
+
+         10.0.1.0          10.1.0.1
+             |                 |
+             +------+----------+
+                    |
+                    v
+  +----------+----------+----------+----------+
+  |  ip:time |     2    | ip:time  | ip:time  |
+  +----------+----------+----------+----------+
+                   |
+                   |      +---------------+
+                   |      | 10.0.1.0: 30s |
+                   +--->  +---------------+
+                          | 10.1.0.1: 10s |
+                          +---------------+
+                          
+                          
+lo que implemente en python seria una idea asi.. 
+
+recorremos con un iterador el hash.. optenemos el par {ip:time}
+primero confirmamos que estamos calculando la diferencia de los tiempos con los mismos ips y despues hacer el delta tiempo
+
+nada eso.. te voy a mandar fotos me da paja esto jaja.
