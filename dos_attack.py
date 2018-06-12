@@ -33,8 +33,8 @@ def dos_attack(ips):
 
             #no hay DOS
             if not warning_time(dos_time, ip.tiempo):
-                #limpio el registro
-                dos_dic[ip.direccion] = [];
+                #limpio el registro 
+                dos_dic[ip.direccion] = [ip]; #fixed. 
 
             else:
                 #agrego al registro
