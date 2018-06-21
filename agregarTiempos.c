@@ -123,12 +123,10 @@ void DOS ( hash_t* hash, heap_t* heap ){
 	while ( !hash_iter_al_final(iter) ){
 		char* ip = hash_iter_ver_actual(iter);
 		lista_t* lista_tiempos = hash_obtener(hash,ip);
-		if ( dos_attack(lista_tiempos) ) 
+		
+		if ( dos_attack(lista_tiempos) ) heap_encolar(heap, ip);
+		
+		hash_iter_avanzar(iter);
 	}
-		
-		
-		
-		
-		
-		
+	
 }
