@@ -122,7 +122,6 @@ bool cargar_archivo(char* archivo, hash_t* hash){
 	
 	
 	if((f1 = fopen(archivo,"r")) == NULL){
-		hash_destruir(hash);
 		return false;
 	}
 	
