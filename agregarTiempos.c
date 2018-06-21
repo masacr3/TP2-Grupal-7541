@@ -1,3 +1,40 @@
+
+/********************************
+*				*	
+*	funciones auxiliares	*
+*				*
+********************************/
+//wrapeer para copiar cadenas
+void copíar(char*, const char*);
+
+//verifica si el tiempo es sospecho
+//si es sospechoso por q la diferncia
+//es de menos de 2 segundos
+//pre: las cadenas tienen el formato iso8601
+bool tiempo_sospechoso( char*, char*);
+
+/****************************************
+*					*
+*	implementacion hash		*
+*					*
+****************************************/
+//carga los tiempos de los ip al hash
+//pre: los tiempos estan ordenados de menor a mayor
+bool agregar_tiempos(hash_t* hash, const char*,const char*);
+
+
+//abre el archivo y carga el ip con sus respectivos tiempos
+//pre: el archivo esta ordenado de menor a mayor por sus tiempos
+bool cargar_archivo(char* archivo, hash_t* hash)
+
+/****************************************
+*					*
+*	implementacion dos		*
+*					*
+****************************************/
+bool dos_attack( lista_t*);
+void DOS ( hash_t*, heap_t*);
+
 //wrapper copiar
 void copiar (char* destino, const char *cadena){
 	strcpy(destino, cadena);
@@ -7,7 +44,7 @@ void copiar (char* destino, const char *cadena){
 	Agrega los tiempos al hash
 	pre: los tiempos estan ordenados de menor a mayor
 */
-bool agregar_tiempos(hash_t* hash, const char* ip, time_t* tiempo){
+bool agregar_tiempos(hash_t* hash, const char* ip, const char* tiempo){
 	
 	bool esta = hash_pertenece( hash, ip );
 	
@@ -77,10 +114,7 @@ bool dos_attack( lista_t* time_list ){
 	return es_DOS;
 }
 
-bool cargar_archivo(char* archivo){
-	hash_t* hash = hash_crear();
-	if (!hash) return false;
-	
+bool cargar_archivo(char* archivo, hash_t* hash){
 	FILE* f1;
 	
 	char* linea = NULL;
