@@ -107,13 +107,28 @@ bool cargar_archivo(char* archivo){
 		free_strv(datos);
 	}
 	
-	//verico los atackes
-	
-	DOS( hash ) ;
 	
 	free(linea);
 	fclose(f1);
 	
-	
+	return true;
   }
+
+
+void DOS ( hash_t* hash, heap_t* heap ){
+	hash_iter_t* iter = hash_iter_crear(hash);
 	
+	if (!iter) return ;
+	
+	while ( !hash_iter_al_final(iter) ){
+		char* ip = hash_iter_ver_actual(iter);
+		lista_t* lista_tiempos = hash_obtener(hash,ip);
+		if ( dos_attack(lista_tiempos) ) 
+	}
+		
+		
+		
+		
+		
+		
+}
