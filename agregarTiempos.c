@@ -38,6 +38,45 @@ bool tiempo_sospechoso( char* tiempo1, char* tiempo2 ){
 	return ( difftime(t1,t2) < 2 );
 }
 
+/*
+	Chequea si una lista de tiempos de un Ip esta implementando un atacke DOS
+*/
+bool dos_attack( lista_t* time_list ){
+	
+	// si esta vacio o el largo de tiempos es menor a 5 no hay atacke
+	if ( lista_esta_vacia(time_list) || lista_largo(time_list) < 5 ) return false;
+	
+	lista_iter_t* primero = lista_iter_crear(time_list);
+	
+	if (!primero) return false;
+	
+	lista_iter_t* ultimo = lista_iter_crear(time_list);
+	
+	if (!ultimo){
+		lista_iter_destruir(primero);
+		return false;
+	}
+	
+	bool es_DOS = false;
+	
+	//avanzo hasta la 5ta posicion 
+	for (int i=0; i < 5; i++) lista_iter_avanzar(ultimo);
+	
+	for ( int i = O; i <= lista_largo(time_list) - 5; i++ ){
+		char* tiempo1 = lista_iter_ver_actual(primero);
+		char* tiempo2 = lista_iter_ver_actual(ultimo);
+		
+		es_DOS = tiempo_sospechoso(tiempo2,tiempo1) ;
+		
+		if ( es _DOS ) break;
+	}
+	
+	lista_iter_destruir(primero);
+	lista_iter_destruir(segundo);
+	
+	return es_DOS;
+}
+
 bool cargar_archivo(char* archivo){
 	hash_t* hash = hash_crear();
 	if (!hash) return false;
