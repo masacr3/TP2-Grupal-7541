@@ -20,30 +20,36 @@ bool tiempo_sospechoso( char*, char*);
 ****************************************/
 //carga los tiempos de los ip al hash
 //pre: los tiempos estan ordenados de menor a mayor
+//post: el hash es modificado
 bool agregar_tiempos(hash_t* hash, const char*,const char*);
 
 
 //abre el archivo y carga el ip con sus respectivos tiempos
 //pre: el archivo esta ordenado de menor a mayor por sus tiempos
-bool cargar_archivo(char* archivo, hash_t* hash)
+//post: el hash es modificado
+bool cargar_archivo(char* archivo, hash_t* hash);
 
 /****************************************
 *					*
 *	implementacion dos		*
 *					*
 ****************************************/
+
+//verifica si en la lista de tiempos hay
+//un ataque dos
+//pre: la lista esta ordenada de menor a mayor
+//pre: los tiempos tienen el formato iso8601
 bool dos_attack( lista_t*);
+
+//verifica si algun ip hizo un ataque D.O.S
+//Pre: los tiempos de los ips estan ordenados de menor a mayor y en formato iso8601
+//post: el heap es modificado, y es llenado con los ip que realizaron el DOS ordenados de menor a mayor.
 void DOS ( hash_t*, heap_t*);
 
-//wrapper copiar
 void copiar (char* destino, const char *cadena){
 	strcpy(destino, cadena);
 }
 
-/*
-	Agrega los tiempos al hash
-	pre: los tiempos estan ordenados de menor a mayor
-*/
 bool agregar_tiempos(hash_t* hash, const char* ip, const char* tiempo){
 	
 	bool esta = hash_pertenece( hash, ip );
@@ -66,18 +72,12 @@ bool agregar_tiempos(hash_t* hash, const char* ip, const char* tiempo){
 return true;
 }
 
-/*
-	verifica si el tiempo es sospechoso de ataque DOS
-*/
 bool tiempo_sospechoso( char* tiempo1, char* tiempo2 ){
 	time_t t1 = iso8601_to_time(tiempo1);
 	time_t t2 = iso8601_to_time(tiempo1);
 	return ( difftime(t1,t2) < 2 );
 }
 
-/*
-	Chequea si una lista de tiempos de un Ip esta implementando un atacke DOS
-*/
 bool dos_attack( lista_t* time_list ){
 	
 	// si esta vacio o el largo de tiempos es menor a 5 no hay atacke
