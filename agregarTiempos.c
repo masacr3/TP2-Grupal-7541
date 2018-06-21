@@ -1,8 +1,12 @@
+//wrapper copiar
+void copiar (char* destino, const char *cadena){
+	strcpy(destino, cadena);
+}
+
 /*
 	Agrega los tiempos al hash
 	pre: los tiempos estan ordenados de menor a mayor
 */
-
 bool agregar_tiempos(hash_t* hash, const char* ip, time_t* tiempo){
 	
 	bool esta = hash_pertenece( hash, ip );
@@ -25,7 +29,9 @@ bool agregar_tiempos(hash_t* hash, const char* ip, time_t* tiempo){
 return true;
 }
 
-
+/*
+	verifica si el tiempo es sospechoso de ataque DOS
+*/
 bool tiempo_sospechoso( char* tiempo1, char* tiempo2 ){
 	time_t t1 = iso8601_to_time(tiempo1);
 	time_t t2 = iso8601_to_time(tiempo1);
@@ -49,10 +55,17 @@ bool cargar_archivo(char* archivo){
 	
 	//cargo los tiempos al hash
 	for (int i= 0; getline(&linea, &capacidad, f1)>0; i++ ){
-		char** ip_tiempo_metodo_recurso = split(linea,'\t');
-		char* ip = ip_tiempo_metodo_recurso[0];
-		char* tiempo = ip_tiempo_metodo_recurso[1];
-		agregar_tiempos( hash, ip, tiempo);
+		char **datos = split(linea, '\t');
+		char* ip;
+		char* tiempo;
+		
+		//copio los tiempos
+		copiar(ip, linea[0]);
+		copiar(tiempo, linea[1]);
+		
+		guardar_tiempos(hash,ip,tiempo);
+		
+		free_strv(datos);
 	}
 	
 	//verico los atackes
