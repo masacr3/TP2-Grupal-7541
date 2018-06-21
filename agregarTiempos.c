@@ -129,4 +129,6 @@ void DOS ( hash_t* hash, heap_t* heap ){
 		hash_iter_avanzar(iter);
 	}
 	
+	hash_iter_destruir(iter);
+	
 }
