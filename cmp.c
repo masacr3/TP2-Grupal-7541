@@ -19,3 +19,19 @@ int cmp_tiempos(const char* a, const char* b){
 	
 	return res > 0 ? -1 : 1;
 }
+
+int cmp ( char** arr, char **arr2){
+	char* tiempo1 = arr[1];
+	char* tiempo2 = arr2[1];
+	
+	int res = cmp_tiempos(tiempo1,tiempo2);
+	
+	if ( res == 0 ){
+		int pos[] = {0,2,3}
+		for (int i=0; i<3; i++){
+			int resultado = cmp_cadenas( arr[ pos[i] ], arr[ pos[i] ]);
+			if ( resultado != 0) return resultado;
+		}
+	}
+	return res;
+}
