@@ -43,7 +43,7 @@ int cmp_tiempos(const char* a, const char* b){
 	return res > 0.0 ? 1 : -1;
 }
 
-int cmp ( char** arr, char **arr2){
+int cmp(char** arr, char **arr2){
 	char* tiempo1 = arr[1];
 	char* tiempo2 = arr2[1];
 	
@@ -60,3 +60,10 @@ int cmp ( char** arr, char **arr2){
 	}
 	return res;
 }
+					    
+int cmp_registros(const void* a, const void* b){
+	char** vector_a = split((char*)a, '\t');
+	char** vector_b = split((char*)b, '\t');
+	return cmp(vector_a, vector_b);
+}
+	
