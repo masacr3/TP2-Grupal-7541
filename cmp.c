@@ -68,7 +68,5 @@ int cmp_registros(const void* a, const void* b){
 }
 	
 int cmp_ad_hoc(const void* a, const void* b){
-	char* registro_a = ad_hoc_obtener_registro(a);
-	char* registro_b = ad_hoc_obtener_registro(b);
-	return cmp_registros(registro_a, registro_b);
+	return cmp_registros(a->registro, b->registro);
 }
