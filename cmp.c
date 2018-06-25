@@ -64,7 +64,10 @@ int cmp(char** arr, char **arr2){
 int cmp_registros(const void* a, const void* b){
 	char** vector_a = split((char*)a, '\t');
 	char** vector_b = split((char*)b, '\t');
-	return cmp(vector_a, vector_b);
+	int resultado = cmp(vector_a, vector_b);
+	free_strv(vector_a);
+	free_strv(vector_v);
+	return resultado;
 }
 	
 int cmp_ad_hoc(const void* a, const void* b){
