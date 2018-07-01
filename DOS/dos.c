@@ -34,7 +34,7 @@ return true;
 bool tiempo_sospechoso( char* tiempo1, char* tiempo2 ){
 	time_t t1 = iso8601_to_time(tiempo1);
 	time_t t2 = iso8601_to_time(tiempo1);
-	return ( difftime(t1,t2) < 2 );
+	return ( difftime(t1,t2) < 2.0 );
 }
 
 bool dos_attack( lista_t* time_list ){
@@ -87,12 +87,26 @@ bool cargar_archivo(char* archivo, hash_t* hash){
 	//cargo los tiempos al hash
 	for (int i= 0; getline(&linea, &capacidad, f1)>0; i++ ){
 		char **datos = split(linea, '\t');
-		char* ip;
-		char* tiempo;
 
+		char* ip = malloc(sizeof(char) * (strlen(datos[0]) + 1) );
+
+		if ( !ip ){
+			free(linea);
+			free_strv(datos);
+			return NULL;
+		}
+
+		char* tiempo = malloc(sizeof(char) * (strlen(datos[1]) + 1) );;
+
+		if ( !tiempo ){
+			free(ip);
+			free(linea);
+			free_strv(datos);
+			return NULL;
+		}
 		//copio los tiempos
-		copiar(ip, linea[0]);
-		copiar(tiempo, linea[1]);
+		copiar(ip, datos[0]);
+		copiar(tiempo, datos[1]);
 
 		guardar_tiempos(hash,ip,tiempo);
 
