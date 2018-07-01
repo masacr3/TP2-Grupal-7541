@@ -15,7 +15,7 @@ void pruebas_DOS_atake (){
   char* lista_ip[] = {"1","1","1","1","1"};
   char* tiempos[] = {"10","10","10","10","10"};
 
-  for (int i=0; i<5; i++) hash_guardar(hast, lista_ip[i], tiempos[i]);
+  for (int i=0; i<5; i++) agregar_tiempos(hast, lista_ip[i], tiempos[i]);
 
   DOS(hash,heap);
 
@@ -35,7 +35,7 @@ void pruebas_DOS_Noatake (){
   char* lista_ip[] = {"1","1","1","1"};
   char* tiempos[] = {"10","10","10","10"};
 
-  for (int i=0; i<4; i++) hash_guardar(hast, lista_ip[i], tiempos[i]);
+  for (int i=0; i<4; i++) agregar_tiempos(hast, lista_ip[i], tiempos[i]);
 
   DOS(hash,heap);
 
@@ -55,7 +55,7 @@ void pruebas_DOS (){
   char* lista_ip[] = {"1","1","1","1","1","11","11","11","11","11","2","2","2","2","2"};
   char* tiempos[] = {"10","10","10","10","10","11","11","11","11","11","2","2","2","2","2"};
 
-  for (int i=0; i<15; i++) hash_guardar(hast, lista_ip[i], tiempos[i]);
+  for (int i=0; i<15; i++) agregar_tiempos(hast, lista_ip[i], tiempos[i]);
 
   DOS(hash,heap);
 
