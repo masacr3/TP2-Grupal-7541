@@ -12,10 +12,10 @@ void pruebas_DOS (){
   hash_t* hash = hash_crear(NULL);
   heap_t heap = heap_crear(strcmp);
 
-  char* lista_ip[] = {"1","2","3","4","1","1","1","1","1"};
-  int tiempos[] = {1,10,3,2,4,4,4,4,4};
+  char* lista_ip[] = {"1","1","1","1","1"};
+  char* tiempos[] = {"10","10","10","10","10"};
 
-  for (int i=0; i<4; i++) hash_guardar(hast, lista_ip[i], &tiempos[i]);
+  for (int i=0; i<4; i++) hash_guardar(hast, lista_ip[i], tiempos[i]);
 
   DOS(hash,heap);
 
