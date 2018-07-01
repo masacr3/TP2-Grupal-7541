@@ -70,5 +70,5 @@ void pruebas_DOS (){
 void pruebas (){
   pruebas_DOS_atake();
   pruebas_DOS_Noatake();
-
+  pruebas_DOS();
 }
