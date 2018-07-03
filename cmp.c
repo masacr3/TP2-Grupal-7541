@@ -22,6 +22,10 @@ int cmp_ips(char* ip1, char* ip2){
 	char** vector_ip1 = split(ip1, '.');
 	char** vector_ip2 = split(ip2, '.');
 	
+	/*off
+		+bad logic
+		+fix remove vector_ips
+		
 	for (int i = 0; i < 4; i++){
 		int resultado = cmp_numeros(atoi(vector_ip1[i]), atoi(vector_ip2[i]);
 		if (resultado > 0) return resultado;
@@ -29,8 +33,20 @@ int cmp_ips(char* ip1, char* ip2){
 		if (resultado < 0) return resultado;
 					    
 	}
-					    
-	return 0;
+	*/
+	//refactor
+	//@Leonel R.
+	int res = 0;
+	
+	for( int i=0; i<4 ; i++){
+		res = cmp_numeros( atoi(vector_ip1), atoi(vector_ip2) );
+		if (res) break;
+	}
+	
+	free_strv(vector_ip1);			    
+	free_strv(vector_ip2);
+	
+	return res;
 }
 
 int cmp_tiempos(const char* a, const char* b){
