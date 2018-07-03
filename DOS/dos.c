@@ -4,6 +4,7 @@
 #include <stddef.h>
 #include <timer.h>
 #include "dos.h"
+#include "lista.h"
 
 void copiar (char* destino, const char *cadena){
 	strcpy(destino, cadena);
@@ -27,8 +28,9 @@ bool agregar_tiempos(hash_t* hash, const char* ip, const char* tiempo){
 		lista_insertar_ultimo( lista, tiempo );
 		hash_guardar ( hash, ip, lista );
 	}
-
-return true;
+	
+	
+	return true;
 }
 
 bool tiempo_sospechoso( char* tiempo1, char* tiempo2 ){
@@ -121,7 +123,7 @@ bool cargar_archivo(char* archivo, hash_t* hash){
   }
 
 
-void DOS ( hash_t* hash, heap_t* heap ){
+void DOS ( const hash_t* hash, heap_t* heap ){
 	hash_iter_t* iter = hash_iter_crear(hash);
 
 	if (!iter) return ;
@@ -130,8 +132,17 @@ void DOS ( hash_t* hash, heap_t* heap ){
 		char* ip = hash_iter_ver_actual(iter);
 		lista_t* lista_tiempos = hash_obtener(hash,ip);
 
-		if ( dos_attack(lista_tiempos) ) heap_encolar(heap, ip);
-
+		if ( dos_attack(lista_tiempos) ) {
+			char* copy_ip = malloc( sizeof(char) * ( strlen(ip) + 1 ) );
+			
+			if ( !copy_ip ){
+				hash_iter_destruir(iter);
+				return NULL;
+			}
+			
+			strcpy(copy_ip,ip);
+			heap_encolar(heap, copy_ip);
+		}
 		hash_iter_avanzar(iter);
 	}
 
