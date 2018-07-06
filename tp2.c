@@ -9,6 +9,9 @@
 #include "heap.h"
 #include "lista.h"
 #include "ad_hoc.h"
+#include "agregararchivo_vervisitantes.h" //@Leonel R.
+
+//nota tenes q agregar todas las estructuras como pila , listas , etc.. el abb no porq ya te lo inclui por q esta modificado
 
 struct ad_hoc{
   char* registro;
